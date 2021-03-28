@@ -94,11 +94,19 @@ export default function App() {
           <Route exact path="/">
             <div className="App">
               <Navbar content={NavbarContent} />
-              <ProductLists content={data} />
+              <ProductLists
+                content={data}
+                buttonstatement1="Add to Cart"
+                buttonstatement2="Desc"
+              />
             </div>
           </Route>
           <Route path="/Cart">
-            <Cart />
+            <Cart
+              content={data}
+              buttonstatement1="Delete"
+              buttonstatement2="Desc"
+            />
           </Route>
         </Switch>
       </div>
