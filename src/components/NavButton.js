@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Container } from "reactstrap";
 export default function NavButton(props) {
-  var list = props.buttonList;
+  var list = props.List;
 
   return (
     <>
@@ -9,8 +9,7 @@ export default function NavButton(props) {
         {list.map((val) => {
           return (
             <Button color="primary" className="m-2">
-              {" "}
-              {val}{" "}
+              {val}
             </Button>
           );
         })}

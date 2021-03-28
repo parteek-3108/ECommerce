@@ -7,7 +7,7 @@ export default function Navbar(props) {
   return (
     <Container>
       <DisplayTitle title={props.content.PageTitle} />
-      <NavButton buttonList={props.content.Buttons} />
+      <NavButton List={props.content.ButtonsList} />
     </Container>
   );
 }
