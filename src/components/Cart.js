@@ -8,11 +8,14 @@ export default function Cart(props) {
     PageTitle: "Cart !!!",
     ButtonsList: ["BackToProductPage", "LogOut"]
   };
+  console.log(props.content, props.cartData, props.setCartFunction);
   return (
     <Container>
       <Navbar content={content} />
       <ProductLists
         content={props.content}
+        cartData={props.cartData}
+        setCartFunction={props.setCartFunction}
         buttonstatement1={props.buttonstatement1}
         buttonstatement2={props.buttonstatement2}
       />
