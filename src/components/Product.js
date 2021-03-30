@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardImg,
@@ -12,8 +12,7 @@ import {
 import { Link, Router } from "react-router-dom";
 import ModalComp from "./ModalComp";
 export default function Product(props) {
-  const [isVisible, setVisible] = React.useState(false);
-
+  console.log(props);
   function handleEvent() {
     var tempData;
     if (props.buttonstatement1 == "Add to Cart") {
@@ -25,10 +24,16 @@ export default function Product(props) {
         console.log(cartValue.id !== props.cartData[props.index].id);
         return cartValue.id !== props.cartData[props.index].id;
       });
-      console.log(tempData);
     }
 
     props.setCartFunction(tempData);
+    if (props.updateCartDB) {
+      try {
+        props.updateCartDB(tempData);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 
   function IncreaseQuantity() {
@@ -39,6 +44,13 @@ export default function Product(props) {
       return current;
     });
     props.setCartFunction(tempData);
+    if (props.updateCartDB) {
+      try {
+        props.updateCartDB(tempData);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
   function DecreaseQuantity() {
     let current = props.content;
@@ -48,7 +60,16 @@ export default function Product(props) {
       return current;
     });
     props.setCartFunction(tempData);
+    if (props.updateCartDB) {
+      try {
+        props.updateCartDB(tempData);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
+
+  const [toggle, setToggle] = useState(false);
 
   return (
     <>
@@ -123,15 +144,19 @@ export default function Product(props) {
             className="m-1"
             color="danger"
             onClick={() => {
-              setVisible(!isVisible);
+              setToggle(!toggle);
             }}
           >
             {props.buttonstatement2}
           </Button>
         </CardBody>
       </Card>
-      {isVisible ? (
-        <ModalComp setVisible="true" content={props.content} />
+      {toggle ? (
+        <ModalComp
+          toggle={true}
+          content={props.content}
+          setToggle={setToggle}
+        />
       ) : (
         <p></p>
       )}

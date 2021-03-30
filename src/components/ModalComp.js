@@ -9,25 +9,28 @@ import {
 } from "reactstrap";
 
 const ModalComp = (props) => {
-  const { buttonLabel, className } = props;
+  // const { buttonLabel, className } = props;
 
-  const [modal, setModal] = useState(props.setVisible);
+  // const [modal, setModal] = useState(props.setVisible);
 
-  const toggle = () => setModal(!modal);
+  // const toggle = () => setModal(!modal);
 
   const closeBtn = (
-    <button className="close" onClick={toggle}>
+    <button className="close" onClick={()=>{
+      props.setToggle(!props.toggle);
+    }}>
       &times;
     </button>
   );
 
   return (
     <div>
-      <Button color="danger" onClick={toggle}>
-        {buttonLabel}
-      </Button>
-      <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle} close={closeBtn}>
+      <Modal isOpen={props.toggle} toggle={()=>{
+      props.setToggle(!props.toggle);
+    }} >
+        <ModalHeader toggle={()=>{
+        props.setToggle(!props.toggle);
+        }} close={closeBtn}>
           Modal title
         </ModalHeader>
         <CardImg
@@ -46,7 +49,9 @@ const ModalComp = (props) => {
           culpa qui officia deserunt mollit anim id est laborum.
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>
+          <Button color="primary" onClick={()=>{
+            props.setToggle(!props.toggle);
+          }}>
             Ok
           </Button>
         </ModalFooter>

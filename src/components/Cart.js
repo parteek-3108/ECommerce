@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container } from "reactstrap";
 import Navbar from "./Navbar";
 import ProductLists from "./ProductsList";
 export default function Cart(props) {
-  // return <p>parteek</p>;
+  // console.log(props);
+
   var content = {
     PageTitle: "Cart !!!",
     ButtonsList: ["BackToProductPage", "LogOut"]
   };
-  console.log(props.content, props.cartData, props.setCartFunction);
   return (
     <Container>
       <Navbar content={content} />
       <ProductLists
+        updateCartDB={props.updateCartDB}
         content={props.content}
         cartData={props.cartData}
         setCartFunction={props.setCartFunction}

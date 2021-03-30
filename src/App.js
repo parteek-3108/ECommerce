@@ -14,20 +14,35 @@ export default function App() {
     PageTitle: "Home!!!",
     ButtonsList: ["Login"]
   });
+
+  const setCartDB = (cartData) => {
+    console.log("entered in update cart", cartData);
+    fetch("https://qgley.sse.codesandbox.io/setCart", {
+      method: "POST",
+      body: cartData,
+      header: { "Content-type": "application/json" }
+    })
+      .then((response) => {
+        return response;
+      })
+      .catch((err) => console.log(err));
+  };
+  // setCartDB({ name: "parteek" });
   useEffect(function () {
-    fetch("https://8hydl.sse.codesandbox.io/getProducts")
+    fetch("https://qgley.sse.codesandbox.io/getProducts")
       .then((response) => response.json())
       .then((productData) => {
         setData(productData);
       })
       .catch((err) => console.log(err));
-    fetch("https://8hydl.sse.codesandbox.io/getCart")
+    fetch("https://qgley.sse.codesandbox.io/getCart")
       .then((response) => response.json())
       .then((cartData) => {
         setCartData(cartData);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(3, err));
   }, []);
+
   return (
     <Router>
       <div>
@@ -52,6 +67,7 @@ export default function App() {
               setCartFunction={setCartData}
               buttonstatement1="Delete"
               buttonstatement2="Desc"
+              updateCartDB={setCartDB}
             />
           </Route>
         </Switch>
